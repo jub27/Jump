@@ -1,0 +1,5 @@
+D:/Jump/Jump/.utmp/RelWithDebInfo/6c4y386h/arm64-v8a/CMakeFiles/edit_cache.dir
+D:/Jump/Jump/.utmp/RelWithDebInfo/6c4y386h/arm64-v8a/CMakeFiles/rebuild_cache.dir
+D:/Jump/Jump/.utmp/RelWithDebInfo/6c4y386h/arm64-v8a/GameActivity/CMakeFiles/game.dir
+D:/Jump/Jump/.utmp/RelWithDebInfo/6c4y386h/arm64-v8a/GameActivity/CMakeFiles/edit_cache.dir
+D:/Jump/Jump/.utmp/RelWithDebInfo/6c4y386h/arm64-v8a/GameActivity/CMakeFiles/rebuild_cache.dir
