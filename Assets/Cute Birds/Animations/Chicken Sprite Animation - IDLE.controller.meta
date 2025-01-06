@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: e65da3bdcf4b4d2489aa2b3857eae99a
+timeCreated: 1493781518
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 89649
+  packageName: Cute Birds
+  packageVersion: 1.1
+  assetPath: Assets/Cute Birds/Animations/Chicken Sprite Animation - IDLE.controller
+  uploadId: 180399

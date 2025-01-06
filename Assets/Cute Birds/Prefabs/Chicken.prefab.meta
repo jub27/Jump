@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 56f05323d192c5545a16f4c206783b3b
+timeCreated: 1493780844
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 89649
+  packageName: Cute Birds
+  packageVersion: 1.1
+  assetPath: Assets/Cute Birds/Prefabs/Chicken.prefab
+  uploadId: 180399

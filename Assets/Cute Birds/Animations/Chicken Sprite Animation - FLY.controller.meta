@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 99b36f3a9ce132546b7e9f8e69b813cf
+timeCreated: 1495051370
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 89649
+  packageName: Cute Birds
+  packageVersion: 1.1
+  assetPath: Assets/Cute Birds/Animations/Chicken Sprite Animation - FLY.controller
+  uploadId: 180399

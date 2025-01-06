@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: dc3ba7ed85285e84aa542b45dda7ccbb
+timeCreated: 1493780848
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 89649
+  packageName: Cute Birds
+  packageVersion: 1.1
+  assetPath: Assets/Cute Birds/Prefabs/Yellow Bird.prefab
+  uploadId: 180399

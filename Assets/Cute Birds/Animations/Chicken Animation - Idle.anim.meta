@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: a1e7900211b947a4ea2027b5eeb3146b
+timeCreated: 1493781518
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 89649
+  packageName: Cute Birds
+  packageVersion: 1.1
+  assetPath: Assets/Cute Birds/Animations/Chicken Animation - Idle.anim
+  uploadId: 180399

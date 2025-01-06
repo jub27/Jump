@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 427324e072b0f6b45a9a49b345b2ba18
+timeCreated: 1493780849
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 89649
+  packageName: Cute Birds
+  packageVersion: 1.1
+  assetPath: Assets/Cute Birds/Prefabs/Eagle.prefab
+  uploadId: 180399
