@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Pool;
 
 public class Character : MonoBehaviour
 {
@@ -12,10 +13,46 @@ public class Character : MonoBehaviour
     public Color onJumpColor;
     [SerializeField] private Transform arrow;
 
+    [SerializeField] private CollisionEffect collisionEffect1;
+    [SerializeField] private CollisionEffect collisionEffect2;
+    private ObjectPool<CollisionEffect> effect1Pool;
+    private ObjectPool<CollisionEffect> effect2Pool;
+
+
     private void Awake()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _rigidbody = GetComponent<Rigidbody2D>();
+        effect1Pool = new ObjectPool<CollisionEffect>(OnCreateEffect1, OnGetEffect, OnRealeaseEffect, OnDestroyFromPool, true, 5, 25);
+        effect2Pool = new ObjectPool<CollisionEffect>(OnCreateEffect2, OnGetEffect, OnRealeaseEffect, OnDestroyFromPool, true, 5, 25);
+    }
+
+    private CollisionEffect OnCreateEffect1()
+    {
+        CollisionEffect effect = Instantiate(collisionEffect1);
+        effect.objectPool = effect1Pool;
+        return effect;
+    }
+    private CollisionEffect OnCreateEffect2()
+    {
+        CollisionEffect effect = Instantiate(collisionEffect2);
+        effect.objectPool = effect2Pool;
+        return effect;
+    }
+
+    private void OnGetEffect(CollisionEffect effect)
+    {
+        effect.OnGetFromPool();
+    }
+
+    private void OnRealeaseEffect(CollisionEffect effect)
+    {
+        effect.OnReleaseFromPool();
+    }
+
+    private void OnDestroyFromPool(CollisionEffect effect)
+    {
+       effect.OnDestroyFromPool();
     }
 
     private void Update()
@@ -63,6 +100,15 @@ public class Character : MonoBehaviour
     {
         float force = Mathf.Min(direction.magnitude / 50.0f, MAX_FORCE);
         _rigidbody.AddForce(direction.normalized * force, ForceMode2D.Impulse);
+    }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        foreach( var contact in other.contacts)
+        {
+            CollisionEffect effect = Random.Range(0, 2) == 0 ? effect1Pool.Get() : effect2Pool.Get();
+            effect.transform.position = contact.point;
+        }
     }
     
 }
