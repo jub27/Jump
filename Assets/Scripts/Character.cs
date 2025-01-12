@@ -1,3 +1,4 @@
+using JyCustomTool;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Pool;
@@ -12,7 +13,8 @@ public class Character : MonoBehaviour
     public Color idleColor;
     public Color onJumpColor;
     [SerializeField] private Transform arrow;
-
+    [SerializeField] private AudioClip jumpSound;
+    [SerializeField] private AudioClip collisionSound;
     [SerializeField] private CollisionEffect collisionEffect1;
     [SerializeField] private CollisionEffect collisionEffect2;
     private ObjectPool<CollisionEffect> effect1Pool;
@@ -100,6 +102,7 @@ public class Character : MonoBehaviour
     {
         float force = Mathf.Min(direction.magnitude / 50.0f, MAX_FORCE);
         _rigidbody.AddForce(direction.normalized * force, ForceMode2D.Impulse);
+        SoundManager.Instance.PlaySE(jumpSound, true);
     }
 
     private void OnCollisionEnter2D(Collision2D other)
@@ -108,6 +111,7 @@ public class Character : MonoBehaviour
         {
             CollisionEffect effect = Random.Range(0, 2) == 0 ? effect1Pool.Get() : effect2Pool.Get();
             effect.transform.position = contact.point;
+            SoundManager.Instance.PlaySE(collisionSound, true);
         }
     }
     
