@@ -5,7 +5,7 @@ using UnityEngine.Pool;
 
 public class Character : MonoBehaviour
 {
-    private const float MAX_FORCE = 13f;
+    private const float MAX_FORCE = 16f;
     private Rigidbody2D _rigidbody;
     private Vector2 downPosition;
     private bool _isCanJump;
@@ -19,10 +19,12 @@ public class Character : MonoBehaviour
     [SerializeField] private CollisionEffect collisionEffect2;
     private ObjectPool<CollisionEffect> effect1Pool;
     private ObjectPool<CollisionEffect> effect2Pool;
+    private Vector3 _originScale;
 
 
     private void Awake()
     {
+        _originScale = transform.localScale; 
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _rigidbody = GetComponent<Rigidbody2D>();
         effect1Pool = new ObjectPool<CollisionEffect>(OnCreateEffect1, OnGetEffect, OnRealeaseEffect, OnDestroyFromPool, true, 5, 25);
