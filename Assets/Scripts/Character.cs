@@ -29,6 +29,16 @@ public class Character : MonoBehaviour
         effect2Pool = new ObjectPool<CollisionEffect>(OnCreateEffect2, OnGetEffect, OnRealeaseEffect, OnDestroyFromPool, true, 5, 25);
     }
 
+    private void Start()
+    {
+        if (!PlayerPrefs.HasKey("Position_x"))
+            return;
+        transform.position = new Vector3(PlayerPrefs.GetFloat("Position_x"), PlayerPrefs.GetFloat("Position_y"), PlayerPrefs.GetFloat("Position_z"));
+        transform.rotation = Quaternion.Euler(PlayerPrefs.GetFloat("Rotation_x"), PlayerPrefs.GetFloat("Rotation_y"), PlayerPrefs.GetFloat("Rotation_z"));
+        _rigidbody.angularVelocity = PlayerPrefs.GetFloat("AngularVelocity_z");
+        _rigidbody.linearVelocity = new Vector2(PlayerPrefs.GetFloat("LinearVelocity_x"), PlayerPrefs.GetFloat("LinearVelocity_y"));
+    }
+
     private CollisionEffect OnCreateEffect1()
     {
         CollisionEffect effect = Instantiate(collisionEffect1);
@@ -54,13 +64,13 @@ public class Character : MonoBehaviour
 
     private void OnDestroyFromPool(CollisionEffect effect)
     {
-       effect.OnDestroyFromPool();
+        effect.OnDestroyFromPool();
     }
 
     private void Update()
     {
         _isCanJump = (_rigidbody.linearVelocity == Vector2.zero) && (_rigidbody.angularVelocity == 0);
-        if(_isCanJump)
+        if (_isCanJump)
         {
             _spriteRenderer.color = idleColor;
         }
@@ -68,13 +78,22 @@ public class Character : MonoBehaviour
         {
             _spriteRenderer.color = onJumpColor;
         }
+        PlayerPrefs.SetFloat("Position_x", transform.position.x);
+        PlayerPrefs.SetFloat("Position_y", transform.position.y);
+        PlayerPrefs.SetFloat("Position_z", transform.position.z);
+        PlayerPrefs.SetFloat("Rotation_x", transform.rotation.x);
+        PlayerPrefs.SetFloat("Rotation_y", transform.rotation.y);
+        PlayerPrefs.SetFloat("Rotation_z", transform.rotation.z);
+        PlayerPrefs.SetFloat("AngularVelocity_z", _rigidbody.angularVelocity);
+        PlayerPrefs.SetFloat("LinearVelocity_x", _rigidbody.linearVelocityX);
+        PlayerPrefs.SetFloat("LinearVelocity_y", _rigidbody.linearVelocityY);
     }
 
     public void OnPointerMove(BaseEventData eventData)
     {
         Debug.Log("Move");
         PointerEventData pointerEventData = (PointerEventData)eventData;
-        arrow.localScale = Vector3.one * Mathf.Min( (downPosition - pointerEventData.position).magnitude / 100.0f, MAX_FORCE / 2.0f );
+        arrow.localScale = Vector3.one * Mathf.Min((downPosition - pointerEventData.position).magnitude / 100.0f, MAX_FORCE / 2.0f);
         arrow.right = downPosition - pointerEventData.position;
     }
 
@@ -107,12 +126,12 @@ public class Character : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        foreach( var contact in other.contacts)
+        foreach (var contact in other.contacts)
         {
             CollisionEffect effect = Random.Range(0, 2) == 0 ? effect1Pool.Get() : effect2Pool.Get();
             effect.transform.position = contact.point;
-            SoundManager.Instance.PlaySE(collisionSound, true);
+            SoundManager.Instance.PlaySE(collisionSound, false);
         }
     }
-    
+
 }
