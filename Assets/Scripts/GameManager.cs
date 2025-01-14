@@ -16,11 +16,8 @@ public class GameManager : MonoBehaviour
         Application.targetFrameRate = 120;
     }
 
-    private void Update()
+    public void Goal()
     {
-        if(Input.GetKeyDown(KeyCode.C))
-        {
-            OnGameClearAction?.Invoke();
-        }
+        OnGameClearAction?.Invoke();
     }
 }

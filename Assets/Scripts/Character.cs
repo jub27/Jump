@@ -27,11 +27,12 @@ public class Character : MonoBehaviour
     [SerializeField] private GameObject[] flyParticles;
 
     private Vector3 startPosition = new Vector3(-28.5f, -1.27f, 0);
-
+    public static Character Instance;
 
 
     private void Awake()
     {
+        Instance = this;
         _originScale = transform.localScale; 
         _spriteRenderer = GetComponent<SpriteRenderer>();
         _rigidbody = GetComponent<Rigidbody2D>();
@@ -58,7 +59,8 @@ public class Character : MonoBehaviour
         {
             Instantiate(item).transform.position = transform.position;
         }
-
+        _rigidbody.linearVelocity = Vector2.zero;
+        _rigidbody.angularVelocity = 0;
         StartCoroutine(AsyncClear());
     }
 
