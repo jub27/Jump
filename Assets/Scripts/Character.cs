@@ -1,7 +1,10 @@
 using JyCustomTool;
+using Mono.Cecil;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Pool;
+using UnityEngine.SceneManagement;
 
 public class Character : MonoBehaviour
 {
@@ -20,6 +23,11 @@ public class Character : MonoBehaviour
     private ObjectPool<CollisionEffect> effect1Pool;
     private ObjectPool<CollisionEffect> effect2Pool;
     private Vector3 _originScale;
+    [SerializeField] private GameObject[] clearParticles;
+    [SerializeField] private GameObject[] flyParticles;
+
+    private Vector3 startPosition = new Vector3(-28.5f, -1.27f, 0);
+
 
 
     private void Awake()
@@ -39,6 +47,45 @@ public class Character : MonoBehaviour
         transform.rotation = Quaternion.Euler(PlayerPrefs.GetFloat("Rotation_x"), PlayerPrefs.GetFloat("Rotation_y"), PlayerPrefs.GetFloat("Rotation_z"));
         _rigidbody.angularVelocity = PlayerPrefs.GetFloat("AngularVelocity_z");
         _rigidbody.linearVelocity = new Vector2(PlayerPrefs.GetFloat("LinearVelocity_x"), PlayerPrefs.GetFloat("LinearVelocity_y"));
+        GameManager.Instance.OnGameClearAction += StartClearAction;
+    }
+
+    private void StartClearAction()
+    {
+        _rigidbody.bodyType = RigidbodyType2D.Kinematic;
+        transform.rotation = Quaternion.identity;
+        foreach (var item in clearParticles)
+        {
+            Instantiate(item).transform.position = transform.position;
+        }
+
+        StartCoroutine(AsyncClear());
+    }
+
+    private IEnumerator AsyncClear()
+    {
+        float passedTime = 0;
+        float velocity = 0f;
+        float particleInstantiateTime = 0;
+        while(passedTime <= 10f)
+        {
+            if (particleInstantiateTime >= 0.15f)
+            {
+                Instantiate(flyParticles[Random.Range(0, flyParticles.Length)]).transform.position = transform.position;
+                particleInstantiateTime -= 0.15f;
+            }
+            velocity += Time.deltaTime * 0.1f;
+            velocity = Mathf.Clamp(velocity, 0, 6);
+            transform.position += Vector3.up * velocity;
+            passedTime += Time.deltaTime;
+            particleInstantiateTime += Time.deltaTime;
+            if(passedTime >= 5f)
+                CustomCamera.Instance.isFollow = false;
+            yield return null;
+        }
+        PlayerPrefs.DeleteAll();
+        SceneManager.LoadScene(0);
+        
     }
 
     private CollisionEffect OnCreateEffect1()
