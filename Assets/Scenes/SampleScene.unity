@@ -3429,7 +3429,7 @@ GameObject:
   - component: {fileID: 215633709}
   - component: {fileID: 215633711}
   m_Layer: 0
-  m_Name: Square (1)
+  m_Name: Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6631,7 +6631,7 @@ GameObject:
   - component: {fileID: 608270841}
   - component: {fileID: 608270843}
   m_Layer: 0
-  m_Name: Square
+  m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6660,7 +6660,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 75f1d56a384fbd24d9383765c06b649c, type: 2}
+  - {fileID: 2100000, guid: c9fe6c69335602845863ce3ed3689049, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -12528,7 +12528,7 @@ GameObject:
   - component: {fileID: 1020513609}
   - component: {fileID: 1020513608}
   m_Layer: 0
-  m_Name: Square (3)
+  m_Name: Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

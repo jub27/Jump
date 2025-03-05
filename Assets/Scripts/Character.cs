@@ -142,7 +142,6 @@ public class Character : MonoBehaviour
 
     public void OnPointerMove(BaseEventData eventData)
     {
-        Debug.Log("Move");
         PointerEventData pointerEventData = (PointerEventData)eventData;
         arrow.localScale = Vector3.one * Mathf.Min((downPosition - pointerEventData.position).magnitude / 100.0f, MAX_FORCE / 2.0f);
         arrow.right = downPosition - pointerEventData.position;
